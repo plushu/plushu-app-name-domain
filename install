@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ $PLUSHU_TRACE ]] && set -x
+
+hostname=`hostname -f`
+
+if [[ ! -f "$PLUSHU_ROOT/APPS_DOMAIN" && -n `dig +short "$hostname"` ]]; then
+  echo "Hostname is world-routable, configuring as apps domain..."
+  echo "$hostname" >"$PLUSHU_ROOT/APPS_DOMAIN"
+else
+  echo "To configure a domain to make all app names available under, set it"
+  echo "in $PLUSHU_ROOT/APPS_DOMAIN and it will be used when configuring"
+  echo "the default domain for simple app names."
+fi
