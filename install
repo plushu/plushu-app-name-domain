@@ -3,22 +3,12 @@ set -eo pipefail; [[ $PLUSHU_TRACE ]] && set -x
 
 hostname=`hostname -f`
 
-echo_setup_info () {
+
+if [[ ! -f "$PLUSHU_ROOT/APPS_DOMAIN" ]]; then
+  echo "Configuring $hostname as apps domain..."
+  printf '%s\n' "$hostname" >"$PLUSHU_ROOT/APPS_DOMAIN"
+else
   echo "To configure a domain to make all app names available under, set it"
   echo "in $PLUSHU_ROOT/APPS_DOMAIN and it will be used when configuring"
   echo "the default domain for simple app names."
-}
-
-if [[ ! -f "$PLUSHU_ROOT/APPS_DOMAIN" ]]; then
-  # If we can dig the hostname and determine it's not world-routable
-  if command -v dig >/dev/null 2>&1 && [[ -z `dig +short "$hostname"` ]]; then
-    echo "Your hostname does not appear to be resolvable via DNS."
-    echo_setup_info
-  # Otherwise, just assume it is
-  else
-    echo "Configuring $hostname as apps domain..."
-    printf '%s\n' "$hostname" >"$PLUSHU_ROOT/APPS_DOMAIN"
-  fi
-else
-  echo_setup_info
 fi
