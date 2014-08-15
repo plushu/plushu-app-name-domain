@@ -4,7 +4,6 @@ set -eo pipefail; [[ -n "$PLUSHU_TRACE" ]] && set -x
 app=$1
 appslug="${app/\//-}"
 app_dir=$PLUSHU_ROOT/apps/$app
-domain_file=$app_dir/domains
 
 if [[ "$appslug" == *.* ]]; then
   printf '%s\n' "$appslug"
