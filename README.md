@@ -9,6 +9,9 @@ app as a subdomain of `APPS_DOMAIN` (eg. if `APPS_DOMAIN` were example.com, and
 an app were pushed named `myapp`, its defult domain would be
 `myapp.example.com`).
 
+This plugin also sets the default hostname from within the app's container to
+this default name.
+
 See also [plushu/plushu-domains][], which allows for defining additional custom
 domains for an app.
 
