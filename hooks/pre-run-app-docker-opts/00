@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ -n "$PLUSHU_TRACE" ]] && set -x
+
+app=$1
+appslug="${app/\//-}"
+app_dir=$PLUSHU_ROOT/apps/$app
+
+if [[ "$appslug" == *.* ]]; then
+  printf '%s\n' "--hostname $appslug"
+elif [[ -f "$PLUSHU_ROOT/APPS_DOMAIN" ]]; then
+  printf '%s\n' "--hostname $appslug.$(<"$PLUSHU_ROOT/APPS_DOMAIN")"
+fi
