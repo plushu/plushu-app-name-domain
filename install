@@ -7,7 +7,7 @@ if [[ ! -f "$PLUSHU_PLUGINS_ROOT/APPS_DOMAIN" ]]; then
   echo "Configuring $hostname as apps domain..."
   printf '%s\n' "$hostname" >"$PLUSHU_PLUGINS_ROOT/APPS_DOMAIN"
   if [[ "$EUID" == 0 ]]; then
-    chown "$PLUSHU_USER" "$PLUSHU_PLUGINS_ROOT/APPS_DOMAIN"
+    chown "$PLUSHU_USER:" "$PLUSHU_PLUGINS_ROOT/APPS_DOMAIN"
   fi
 else
   echo "To configure a domain to make all app names available under, set it"
