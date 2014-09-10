@@ -5,8 +5,14 @@ app=$1
 appslug="${app/\//-}"
 app_dir=$PLUSHU_APPS_DIR/$app
 
+if [[ -f "$PLUSHU_PLUGINS_ROOT/APPS_DOMAIN" ]]; then
+  apps_domain="$(<"$PLUSHU_PLUGINS_ROOT/APPS_DOMAIN")"
+elif [[ -f "$PLUSHU_ROOT/APPS_DOMAIN" ]]; then
+  apps_domain="$(<"$PLUSHU_ROOT/APPS_DOMAIN")"
+fi
+
 if [[ "$appslug" == *.* ]]; then
   printf '%s\n' "$appslug"
-elif [[ -f "$PLUSHU_ROOT/APPS_DOMAIN" ]]; then
-  printf '%s\n' "$appslug.$(<"$PLUSHU_ROOT/APPS_DOMAIN")"
+elif [[ -n "$apps_domain" ]]; then
+  printf '%s\n' "$appslug.$apps_domain"
 fi

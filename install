@@ -3,14 +3,14 @@ set -eo pipefail; [[ -n "$PLUSHU_TRACE" ]] && set -x
 
 hostname=`hostname -f`
 
-if [[ ! -f "$PLUSHU_ROOT/APPS_DOMAIN" ]]; then
+if [[ ! -f "$PLUSHU_PLUGINS_ROOT/APPS_DOMAIN" ]]; then
   echo "Configuring $hostname as apps domain..."
-  printf '%s\n' "$hostname" >"$PLUSHU_ROOT/APPS_DOMAIN"
+  printf '%s\n' "$hostname" >"$PLUSHU_PLUGINS_ROOT/APPS_DOMAIN"
   if [[ "$EUID" == 0 ]]; then
-    chown "$PLUSHU_USER" "$PLUSHU_ROOT/APPS_DOMAIN"
+    chown "$PLUSHU_USER" "$PLUSHU_PLUGINS_ROOT/APPS_DOMAIN"
   fi
 else
   echo "To configure a domain to make all app names available under, set it"
-  echo "in $PLUSHU_ROOT/APPS_DOMAIN and it will be used when configuring"
-  echo "the default domain for simple app names."
+  echo "in $PLUSHU_PLUGINS_ROOT/APPS_DOMAIN and it will be used when"
+  echo "configuring the default domain for simple app names."
 fi
