@@ -5,8 +5,8 @@ app=$1
 appslug="${app/\//-}"
 app_dir=$PLUSHU_APPS_DIR/$app
 
-if [[ -f "$PLUSHU_PLUGINS_ROOT/APPS_DOMAIN" ]]; then
-  apps_domain="$(<"$PLUSHU_PLUGINS_ROOT/APPS_DOMAIN")"
+if [[ -f "$PLUSHU_DIR/APPS_DOMAIN" ]]; then
+  apps_domain="$(<"$PLUSHU_DIR/APPS_DOMAIN")"
 elif [[ -f "$PLUSHU_ROOT/APPS_DOMAIN" ]]; then
   apps_domain="$(<"$PLUSHU_ROOT/APPS_DOMAIN")"
 fi
