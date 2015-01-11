@@ -2,7 +2,6 @@
 set -eo pipefail; [[ -n "$PLUSHU_TRACE" ]] && set -x
 
 app=$1
-appslug="${app/\//-}"
 app_dir=$PLUSHU_APPS_DIR/$app
 
 if [[ -f "$PLUSHU_DIR/APPS_DOMAIN" ]]; then
@@ -11,8 +10,8 @@ elif [[ -f "$PLUSHU_ROOT/APPS_DOMAIN" ]]; then
   apps_domain="$(<"$PLUSHU_ROOT/APPS_DOMAIN")"
 fi
 
-if [[ "$appslug" == *.* ]]; then
-  printf '%s\n' "$appslug"
-elif [[ -n "$apps_domain" ]]; then
-  printf '%s\n' "$appslug.$apps_domain"
+if [[ "$app" =~ ^([a-zA-Z0-9_\-]+\.?)+$ ]]; then
+  printf '%s\n' "$app"
+elif [[ -n "$apps_domain" && "$app" =~ ^[a-zA-Z0-9_\-]+$ ]]; then
+  printf '%s\n' "$app.$apps_domain"
 fi
