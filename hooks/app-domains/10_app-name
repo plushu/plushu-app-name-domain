@@ -10,7 +10,7 @@ elif [[ -f "$PLUSHU_ROOT/APPS_DOMAIN" ]]; then
   apps_domain="$(<"$PLUSHU_ROOT/APPS_DOMAIN")"
 fi
 
-if [[ "$app" =~ ^([a-zA-Z0-9_\-]+\.?)+$ ]]; then
+if [[ "$app" =~ ^[a-zA-Z0-9_\-]+\.([a-zA-Z0-9_\-]+\.?)*$ ]]; then
   printf '%s\n' "$app"
 elif [[ -n "$apps_domain" && "$app" =~ ^[a-zA-Z0-9_\-]+$ ]]; then
   printf '%s\n' "$app.$apps_domain"
