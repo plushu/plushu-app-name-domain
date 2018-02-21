@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 set -eo pipefail; [[ -n "$PLUSHU_TRACE" ]] && set -x
 
-hostname=`hostname -f`
+hostname=`hostname`
+
+if [[ "$hostname" != *.* ]]; then
+  hostname=`hostname -f`
+fi
 
 if [[ ! -f "$PLUSHU_DIR/APPS_DOMAIN" ]]; then
   echo "Configuring $hostname as apps domain..."
